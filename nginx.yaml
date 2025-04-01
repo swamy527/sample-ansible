@@ -1,0 +1,14 @@
+- name: Install Nginx using Yum
+  hosts: server  # Replace with your target hosts or 'all'
+  become: yes  # Run as sudo
+  tasks:
+    - name: Install Nginx
+      ansible.builtin.yum:
+        name: nginx
+        state: present
+
+    - name: Start and Enable Nginx
+      ansible.builtin.service:
+        name: nginx
+        state: started
+        enabled: yes
