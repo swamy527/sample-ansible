@@ -2,16 +2,12 @@
   hosts: server  # Replace with your target hosts or 'all'
   become: yes  # Run as sudo
   tasks:
-    - name: Install EPEL repository (if Amazon Linux 2)
-      ansible.builtin.yum:
-        name: epel-release
-        state: present
-      when: ansible_distribution == "Amazon" and ansible_distribution_major_version == "2"
+    - name: dependecies install
+      ansible.builtin.command: amazon-linux-extras enable nginx1
     - name: Install Nginx
       ansible.builtin.yum:
         name: nginx
         state: present
-
     - name: Start and Enable Nginx
       ansible.builtin.service:
         name: nginx
